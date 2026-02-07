@@ -1,4 +1,4 @@
-## 1.Multilayer Perceptron (MLP)
+## Multilayer Perceptron(MLP)
 ### 1.What is an MLP?
 MLP = Multi-Layer PerceptronIt is a type of Artificial Neural Network (ANN)
 "Multi-layer" → has one or more hidden layers between input and output
@@ -57,13 +57,13 @@ def forward_layer(inputs, weights, bias, activation):
     z = np.dot(inputs, weights) + bias  # Linear transformation
     return activation(z)  # Non-linear activation
 #### 5️.Activation Functions (Basics)
-```
+
 <img width="1326" height="278" alt="image" src="https://github.com/user-attachments/assets/522023bc-4331-4c9a-b66e-38d4f409169e" />
-```
+
 #### 6.Loss Functions
-```
+
 <img width="880" height="363" alt="image" src="https://github.com/user-attachments/assets/5558f8e3-377a-461c-a849-4e4d3a605c16" />
-```
+
 #### 7️.Training MLP → Backpropagation
 Training Loop:
 1. Forward pass → compute Z and A
@@ -73,9 +73,7 @@ Training Loop:
 5. Repeat
 Gradient Descent Update Rule:
 Gradient Descent updates parameters to minimize the loss function.Move parameters in the opposite direction of the gradient.
-```
 <img width="653" height="300" alt="image" src="https://github.com/user-attachments/assets/5979b260-a975-4a19-8799-405d78d05439" />
-```
 Where α is the learning rate.
 
 #### 8️.Simple Intuition
