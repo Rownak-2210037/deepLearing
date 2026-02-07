@@ -1,5 +1,5 @@
-## 1.Multilayer Perceptron (MLP) - Complete Guide
-### What is an MLP?
+## 1.Multilayer Perceptron (MLP)
+### 1.What is an MLP?
 MLP = Multi-Layer PerceptronIt is a type of Artificial Neural Network (ANN)
 "Multi-layer" → has one or more hidden layers between input and output
 Each layer contains neurons (also called nodes or units)
@@ -7,7 +7,7 @@ Neurons perform two operations:
 
 Take weighted sum of inputs + bias → Z
 Apply activation function → A
-### 2️⃣ Structure of an MLP
+### 2.Structure of an MLP
 Input layer → Hidden layer(s) → Output layer
 Layer Breakdown:
 Input layer: Your features/input data
@@ -16,28 +16,28 @@ Hidden layer(s): Neurons that learn patterns and representations
 
 Output layer: Final prediction/classification
 
-### Example Architecture:
+### 3.Example Architecture:
 Input: 4 features → n₀ = 4
 Hidden layer: 3 neurons → n₁ = 3
 Output: 2 classes → n₂ = 2
-### 3️⃣ Forward Propagation 
+### 4.Forward Propagation 
 Forward Propagation in MLP 
 What is Forward Propagation?
 It's the process where input data flows through the neural network layer by layer to produce an output.
 #### The 3-Step Process:
-1. Input Layer → Hidden Layer
+##### 1. Input Layer → Hidden Layer
 Hidden Neuron Value = Activation( (Input1 × Weight1) + (Input2 × Weight2) + Bias )
 Each connection has a weight (strength)
 Add a bias (adjustment term)
 Apply activation function (like ReLU, Sigmoid) to add non-linearity
 
-#### 2. Hidden Layer → Output Layer
+##### 2. Hidden Layer → Output Layer
 Output = Activation( (Hidden1 × Weight1) + (Hidden2 × Weight2) + Bias )
 Same process repeats
 
 Different weights and biases
 
-#### 3. Get Final Output
+##### 3. Get Final Output
 For regression: Often linear activation
 
 For classification: Softmax for probabilities
@@ -56,30 +56,29 @@ One layer forward propagation
 def forward_layer(inputs, weights, bias, activation):
     z = np.dot(inputs, weights) + bias  # Linear transformation
     return activation(z)  # Non-linear activation
-#### 5️⃣ Activation Functions (Basics)
-Function	Formula	Common Use
-**ReLU**	f(z) = max(0, z)	Hidden layers
-**Sigmoid** f(z) = \frac{1}{1 + e^{-z}}	Binary classification output
-**Tanh**	f(z) = (e^z - e^{-z})/(e^z + e^{-z})	Hidden layers
-**Softmax**	f(z_i) = e^{z_i}/Σ e^{z_j}	Multi-class output
-#### 6️⃣ Loss Functions
-
-#### 7️⃣ Training MLP → Backpropagation
+#### 5️.Activation Functions (Basics)
+```
+<img width="1326" height="278" alt="image" src="https://github.com/user-attachments/assets/522023bc-4331-4c9a-b66e-38d4f409169e" />
+```
+#### 6.Loss Functions
+```
+<img width="880" height="363" alt="image" src="https://github.com/user-attachments/assets/5558f8e3-377a-461c-a849-4e4d3a605c16" />
+```
+#### 7️.Training MLP → Backpropagation
 Training Loop:
-text
 1. Forward pass → compute Z and A
 2. Compute loss
 3. Backward pass → compute gradients
 4. Update weights (Gradient Descent)
 5. Repeat
 Gradient Descent Update Rule:
-math
-W^{[l]} = W^{[l]} - \alpha \frac{\partial L}{\partial W^{[l]}}
-math
-b^{[l]} = b^{[l]} - \alpha \frac{\partial L}{\partial b^{[l]}}
+Gradient Descent updates parameters to minimize the loss function.Move parameters in the opposite direction of the gradient.
+```
+<img width="653" height="300" alt="image" src="https://github.com/user-attachments/assets/5979b260-a975-4a19-8799-405d78d05439" />
+```
 Where α is the learning rate.
 
-#### 8️⃣ Simple Intuition
+#### 8️.Simple Intuition
 Each neuron = simple calculator (weighted sum + activation)
 
 Hidden layers = feature transformers that learn representations
@@ -110,7 +109,6 @@ def forward_propagation(X, weights, biases):
     A2 = sigmoid(Z2)
     
     return A2, {"Z1": Z1, "A1": A1, "Z2": Z2, "A2": A2}
-🎯 Key Takeaways
 MLPs are universal approximators - can learn any continuous function
 
 Non-linearity from activation functions enables complex pattern learning
