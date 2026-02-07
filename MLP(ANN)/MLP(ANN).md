@@ -1,4 +1,4 @@
-## 🧠 Multilayer Perceptron (MLP) - Complete Guide
+## 1.Multilayer Perceptron (MLP) - Complete Guide
 #### What is an MLP?
 MLP = Multi-Layer PerceptronIt is a type of Artificial Neural Network (ANN)
 "Multi-layer" → has one or more hidden layers between input and output
@@ -21,40 +21,51 @@ Input: 4 features → n₀ = 4
 Hidden layer: 3 neurons → n₁ = 3
 Output: 2 classes → n₂ = 2
 #### 3️⃣ Forward Propagation (Step by Step)
-Step 1: Linear Combination
-math
-Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}
-Where:
+Forward Propagation in MLP (Simple Explanation)
+What is Forward Propagation?
+It's the process where input data flows through the neural network layer by layer to produce an output.
 
-A^{[0]} = X (input data)
+The 3-Step Process:
+1. Input Layer → Hidden Layer
+text
+Hidden Neuron Value = Activation( (Input1 × Weight1) + (Input2 × Weight2) + Bias )
+Each connection has a weight (strength)
 
-W^{[l]} shape = (neurons in current layer, neurons in previous layer)
+Add a bias (adjustment term)
 
-b^{[l]} shape = (neurons in current layer, 1)
+Apply activation function (like ReLU, Sigmoid) to add non-linearity
 
-Step 2: Activation
-math
-A^{[l]} = f(Z^{[l]})
-Where f is a non-linear activation function (ReLU, Sigmoid, Tanh, etc.)
+2. Hidden Layer → Output Layer
+text
+Output = Activation( (Hidden1 × Weight1) + (Hidden2 × Weight2) + Bias )
+Same process repeats
 
-Step 3: Repeat
-Repeat Steps 1-2 for each hidden layer → output layer
+Different weights and biases
 
-#### 4️⃣ Shapes Recap
-Layer	Input Shape	Weight Shape	Bias Shape	Z Shape	Activation Shape
-Hidden1	(n₀, m)	(n₁, n₀)	(n₁, 1)	(n₁, m)	(n₁, m)
-Hidden2	(n₁, m)	(n₂, n₁)	(n₂, 1)	(n₂, m)	(n₂, m)
-Output	(n₂, m)	(n_y, n₂)	(n_y, 1)	(n_y, m)	(n_y, m)
-Where:
+3. Get Final Output
+For regression: Often linear activation
 
-n₀ = input features
+For classification: Softmax for probabilities
 
-n₁, n₂ = hidden layer neurons
+Visual Flow:
 
-n_y = output neurons
+Input → Multiply by Weights → Add Bias → Apply Activation → Repeat → Final Output
+          (Layer 1)                         (Layer 2)             (Output)
+Key Points:
+Weights & Biases: Learned during training
 
-m = batch size
+Activation Functions: Make network non-linear (can learn complex patterns)
 
+Forward Pass: Just calculation, no learning yet
+
+Learning happens during backpropagation (next step)
+
+Simple Code Snippet:
+python
+# One layer forward propagation
+def forward_layer(inputs, weights, bias, activation):
+    z = np.dot(inputs, weights) + bias  # Linear transformation
+    return activation(z)  # Non-linear activation
 #### 5️⃣ Activation Functions (Basics)
 Function	Formula	Common Use
 ReLU	f(z) = max(0, z)	Hidden layers
