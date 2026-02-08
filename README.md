@@ -1,6 +1,6 @@
-## Deep Learning(Neural Networks)
+# Deep Learning(Neural Networks)
 It's the starting of Neural networks
-
+## 👤 Student Info
 **Name:** Md. Rownak Mridha Mahi 
 
 **Department:** Electrical and Computer Engineering (ECE) 
@@ -44,3 +44,4 @@ It's the starting of Neural networks
 - Derive and implement forward and backpropagation
 - Compare classical ML models with neural networks
 - Build intuition for advanced architectures like Transformers and LLMs
+
