@@ -223,3 +223,110 @@ print("Predictions shape:", predictions.shape)
 **nn.Linear(features_in, features_out) → PyTorch transposes weights internally**
 
 
+
+## 10.Backpropagation in Neural Networks 
+#### 10.1 What is Backpropagation?
+
+Backpropagation is the process by which a neural network learns from its mistakes.
+Forward propagation → makes a prediction
+Backpropagation → measures the error and updates weights & biases
+The goal is to minimize the loss function.
+
+#### 10.2. Why Do We Need Backpropagation?
+
+A neural network has many weights.
+Backpropagation answers two key questions:
+
+**Which weight caused how much error?**
+
+**Should a weight be increased or decreased?**
+
+It uses gradients to update parameters in the correct direction.
+
+#### 10.3. High-Level Idea
+
+Do a forward pass and get prediction
+Compute the loss
+Propagate the error backwards through the network
+Update weights using gradient descent
+This backward flow of error gives the name Backpropagation.
+
+#### 10.4. Forward Propagation (Recap)
+
+For a simple MLP with one hidden layer:
+
+Z1 = W1 · X + b1
+A1 = σ(Z1)
+
+Z2 = W2 · A1 + b2
+A2 = σ(Z2)
+Where:
+
+Z = linear output
+
+A = activation output
+
+σ = activation function (Sigmoid)
+
+5. Loss Function (Binary Classification)
+Loss = -[ y log(A2) + (1 - y) log(1 - A2) ]
+
+This measures how wrong the prediction is.
+
+#### 10.6. Backpropagation Steps
+**Step 1: Error at Output Layer**
+dZ2 = A2 - Y
+This is the difference between prediction and actual label.
+
+**Step 2: Gradients for Output Layer**
+dW2 = (1/m) · dZ2 · A1ᵀ
+db2 = (1/m) · sum(dZ2)
+
+**Step 3: Error at Hidden Layer**
+dZ1 = W2ᵀ · dZ2 ⊙ σ′(Z1)
+
+The output error is propagated backward using the chain rule.
+
+**Step 4: Gradients for Hidden Layer**
+dW1 = (1/m) · dZ1 · Xᵀ
+db1 = (1/m) · sum(dZ1)
+
+#### 10.7. Weight Update Rule (Gradient Descent)
+W = W - α · dW
+b = b - α · db
+Where:
+
+α = learning rate
+
+This step allows the network to learn.
+
+#### 10.8. Why Do We Store Values in Cache?
+
+During forward propagation, we compute:
+
+Z1, A1, Z2, A2
+Backpropagation needs these values again to compute gradients.
+
+So we store them in a cache:
+
+cache = {
+    "Z1": Z1, "A1": A1,
+    "Z2": Z2, "A2": A2
+}
+This avoids recomputation and keeps backprop clean and efficient.
+
+#### 10.9. One-Line Summary
+
+Backpropagation uses the chain rule to compute gradients of the loss with respect to network parameters and updates them to reduce prediction error.
+
+#### 10.10. Final Intuition
+
+Forward pass → prediction
+
+Backward pass → correction
+
+Repeated many times → learning
+
+This is how an MLP learns from data.
+
+
