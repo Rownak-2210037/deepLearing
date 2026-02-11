@@ -117,7 +117,7 @@ Proper weight initialization and regularization are crucial
 
 MLPs form the foundation for more complex architectures (CNNs, RNNs)
 
-### 1.Code(Forward Propagation using numpy)
+### 1.1.Code(Forward Propagation using numpy)
 ```
 #Forward Code
 import numpy as np
@@ -173,7 +173,7 @@ print(f"Sample prediction: {predictions[0, 1]:.4f}")
 
 **Sample prediction: 0.5012**
 
-### Code(Forward with pytorch)
+### 1.2.Code(Forward with pytorch)
 ```
 #forward with pytorch
 import torch
@@ -331,7 +331,7 @@ This is how an MLP learns from data.
 
 
 
-### 2.Code(Backward Propagation using numpy)
+### 2.1.Code(Backward Propagation using numpy)
 ```
 #Backward with numpy
 import numpy as np
@@ -421,5 +421,52 @@ print("Sample predictions:\n", A2)
 ### Output:
 
 ![Screenshot 2026-02-10 020951](https://github.com/user-attachments/assets/e2f51c11-cf4a-4433-8422-bc022d091c63)
+
+
+### 2.2.Code(Backward with pytorch)
+```
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+X = torch.randn(5, 3)  # 5 samples, 3 features
+Y = torch.tensor([[1,0,1,0,1]]).float().T  # shape (5,1)
+
+#calculate z1,A1,Z2,A2...
+model = nn.Sequential(
+    nn.Linear(3, 4),
+    nn.Sigmoid(),
+    nn.Linear(4, 1),
+    nn.Sigmoid()
+)
+ 
+criterion = nn.BCELoss()
+
+optimizer = optim.SGD(model.parameters(), lr=0.1)
+
+# Training loop
+
+for i in range(10):
+
+    # Forward pass
+    predictions = model(X)
+
+    # Compute loss
+    loss = criterion(predictions, Y)
+
+    # Backward pass
+    optimizer.zero_grad()   # clear old gradients
+    loss.backward()         # compute gradients
+    optimizer.step()        # update weights
+
+    print(f"Iteration: {i}, Loss: {loss.item()}")
+
+print("\nFinal Predictions:\n", predictions)
+
+```
+### Output:
+![Screenshot 2026-02-10 020951](https://github.com/user-attachments/assets/d268aa71-8917-4371-9a7c-d5ac3c457244)
+
+
 
 
