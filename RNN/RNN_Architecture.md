@@ -7,6 +7,7 @@
 
 ### why we can't handle sequential data with ANN?
 ANN cannot properly handle sequential data because it processes inputs independently and has no memory of previous inputs. Sequential data requires context from earlier time steps, which ANN cannot capture. 
+
 Problem:
 
 1.text input--> varying size
@@ -56,6 +57,39 @@ the model needs to remember “I love deep”.
 
 ANN cannot remember previous words.
 
+**ANN feed forwarded but RNN not**
+
+ANN vs RNN (Feedforward difference)
+
+ANN = Feedforward Network
+
+-> Data moves in one direction only
+
+-> Input → Hidden → Output
+
+-> No loops
+
+-> No memory of previous inputs
+
+-> Output depends only on current input.
+
+RNN = Not Purely Feedforward
+
+-> Has a loop (recurrence)
+
+-> Uses previous hidden state
+
+-> Keeps memory of past inputs
+
+h(t) =f(xt*Wih + h(t-1)*Whh)
+
+
+Output depends on current input and previous hidden state.
+
+ANN: Feedforward network, no memory, processes inputs independently.
+
+RNN: Recurrent network, has feedback loop, remembers previous information.
+
 **Data Input style**
 
 [(timesteps,input feutures)] 
@@ -92,3 +126,77 @@ suppose data exists:
  ![alt text](image.png)
 
 
+### How forward propagation works in RNN?
+
+Moving data from INPUT → HIDDEN → OUTPUT to make a prediction!
+
+# Each word goes through the same process:
+
+Step 1: "I"      → [hidden1] → prediction? (not used)
+
+Step 2: "love"   → [hidden2] (using hidden1's memory)
+
+Step 3: "AI"     → [hidden3] (using hidden2's memory) → FINAL OUTPUT
+
+**At EACH time step (word):**
+
+# FORMULA:
+
+hidden_t = activation( input_t @ W_ih + hidden_{t-1} @ W_hh + bias )
+
+output_t = hidden_t @ W_ho + bias_out
+
+Where:
+
+input_t = current word embedding
+
+hidden_{t-1} = previous hidden state (memory)
+
+W_ih, W_hh, W_ho = weights (learned parameters)
+
+@ = matrix multiplication
+
+
+**Visualization**
+
+START: hidden_0 = [0, 0, 0] (initial memory = empty)
+
+TIME STEP 1: "I"
+
+input_1 = [0.1, 0.2, 0.3]  # embedding for "I"
+
+hidden_1 = tanh( input_1 @ W_ih + hidden_0 @ W_hh )
+
+hidden_1 now = [0.4, 0.5, 0.6] ← remembers "I"
+
+output_1 = hidden_1 @ W_ho  # (not used for final)
+
+TIME STEP 2: "love"
+
+input_2 = [0.4, 0.5, 0.6]  # embedding for "love"
+
+hidden_2 = tanh( input_2 @ W_ih + hidden_1 @ W_hh )
+
+hidden_2 = [0.7, 0.8, 0.9] ← remembers "I love"
+
+output_2 = hidden_2 @ W_ho  # (not used for final)
+
+TIME STEP 3: "AI"
+
+input_3 = [0.7, 0.8, 0.9]  # embedding for "AI"
+
+hidden_3 = tanh( input_3 @ W_ih + hidden_2 @ W_hh )
+
+hidden_3 = [0.2, 0.3, 0.4] ← remembers "I love AI"
+
+output_3 = hidden_3 @ W_ho  # ← FINAL PREDICTION!
+
+FINAL OUTPUT: scores for next word (if training)
+
+[0.1, 0.2, 0.7, 0.1, ...]
+
+
+![alt text](image-1.png)
+
+
+![alt text](image-2.png)
