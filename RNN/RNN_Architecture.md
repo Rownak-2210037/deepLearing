@@ -195,8 +195,52 @@ FINAL OUTPUT: scores for next word (if training)
 
 [0.1, 0.2, 0.7, 0.1, ...]
 
+We use tanh instead of sigmoid in RNN because tanh is zero-centered and provides stronger gradients. This helps stabilize training and reduces vanishing gradient compared to sigmoid.
+
 
 ![alt text](image-1.png)
 
 
 ![alt text](image-2.png)
+
+
+![alt text](image-3.png)
+
+
+![alt text](image-4.png)
+
+
+
+**How RNN Differs from Feedforward Neural Networks**
+
+Feedforward Neural Networks (FNNs):
+
+-> Process data in a single direction, from input to output.
+
+-> Do not store information from previous inputs.
+
+-> Suitable for tasks with independent data, such as image classification.
+
+-> Perform poorly on sequential data due to the absence of memory.
+
+Recurrent Neural Networks (RNNs):
+
+-> Include feedback loops that pass information from previous steps
+-> Maintain memory of past inputs through hidden states
+-> Designed for sequential and time-dependent data
+-> Effective for tasks where context matters, such as text and time-series analysis.
+
+![alt text](image-5.png)
+
+
+**What is Time Series?**
+
+Time Series = data collected in order over time.
+
+That means:
+
+Data points are arranged by time
+
+Order is very important
+
+Present depends on past.
