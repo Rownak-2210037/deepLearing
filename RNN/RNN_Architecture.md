@@ -244,3 +244,5 @@ Data points are arranged by time
 Order is very important
 
 Present depends on past.
+
+**Unfolding in RNN means expanding the recurrent loop across time steps to visualize how the network processes a sequence. Each time step uses the same weights, and unfolding helps us apply backpropagation through time.**
